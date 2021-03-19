@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Project3’s documentation! &#8212; Project3  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-scripts.NN">
+<span id="welcome-to-project3-s-documentation"></span><h1>Welcome to Project3’s documentation!<a class="headerlink" href="#module-scripts.NN" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="scripts.NN.NeuralNetwork">
+<em class="property">class </em><code class="sig-prename descclassname">scripts.NN.</code><code class="sig-name descname">NeuralNetwork</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">setup</span><span class="o">=</span><span class="default_value">[[68, 25, 'sigmoid'], [25, 1, 'sigmoid']]</span></em>, <em class="sig-param"><span class="n">lr</span><span class="o">=</span><span class="default_value">0.05</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">bias</span><span class="o">=</span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.NN.NeuralNetwork" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class that creates a NN and includes methods to train and test it</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setup</strong> – the architecture of the network, where each element in the
+list is a separate layer. Index 0 of each layer is how many
+inputs go into the layer. Index 1 represents the number of
+output nodes for the layer. Index 2 represents the activation
+function for the layer.</p></li>
+<li><p><strong>lr</strong> – learning rate</p></li>
+<li><p><strong>seed</strong> – random seed</p></li>
+<li><p><strong>bias</strong> – value to initialize all of the biases to</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="scripts.NN.NeuralNetwork.backprop">
+<code class="sig-name descname">backprop</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">true_values</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.NN.NeuralNetwork.backprop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the loss and gradient for each output node,
+starting at the last layer.
+Propagates the gradient through the network and records
+the error for each node. Updates the weights/biases based on
+the gradient</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>true_values</strong> – true classification of example</p></li>
+<li><p><strong>data</strong> – training example</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>None, change matrix is filled in for weight updating</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="scripts.NN.NeuralNetwork.feedforward">
+<code class="sig-name descname">feedforward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.NN.NeuralNetwork.feedforward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in data and passes it through the NN</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – One datapoint</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>The output(s) of the final layer in the network</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="scripts.NN.NeuralNetwork.fit">
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">training</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.NN.NeuralNetwork.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains the neural network and computes training loss (MSE).
+Performs stochastic gradient descent using backpropogation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>training</strong> – A list of training examples, where each training example
+is a list where index 0 is the example, and index 1 is
+the true class.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Average training loss over the training examples</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="scripts.NN.NeuralNetwork.make_weights">
+<code class="sig-name descname">make_weights</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n_inputs</span></em>, <em class="sig-param"><span class="n">n_nodes</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.NN.NeuralNetwork.make_weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates random weights for the network initialization</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n_inputs</strong> – Number of input nodes to this layer</p></li>
+<li><p><strong>n_nodes</strong> – Number of nodes to generate weights for</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Layer with random weights initialized for each node</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="scripts.NN.NeuralNetwork.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.NN.NeuralNetwork.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs one forward pass through the network to predict the
+result</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – data to be passed through</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Prediction from the trained network</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="scripts.NN.cross_validation">
+<code class="sig-prename descclassname">scripts.NN.</code><code class="sig-name descname">cross_validation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em>, <em class="sig-param"><span class="n">pos_batch_size</span></em>, <em class="sig-param"><span class="n">neg_batch_size</span></em>, <em class="sig-param"><span class="n">n_epochs</span></em>, <em class="sig-param"><span class="n">pos_enc</span></em>, <em class="sig-param"><span class="n">neg_enc</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.NN.cross_validation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs k-fold cross validation on a set of training data.
+Splits the data into k different partitions and trains k
+different networks where the validation set is the k-th fold,
+and the training set is everything minus that k-th fold.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> – Number of folds</p></li>
+<li><p><strong>pos_batch_size</strong> – How many positive examples to include in each batch</p></li>
+<li><p><strong>neg_batch_size</strong> – How many negative examples to include in each batch</p></li>
+<li><p><strong>n_epochs</strong> – How many epochs to train for</p></li>
+<li><p><strong>pos_enc</strong> – list of positive training examples, where each example
+is a list of length 2, with index 0 being the one-hot
+encoded sequence and index 1 being the class (0 or 1)</p></li>
+<li><p><strong>neg_enc</strong> – same as pos_train but for negative training examples</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>A list of actual classes for each fold, and a list of predicted classes for each fold that can be used to calculate an average AUC across the folds to evaluate model performance</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="scripts.NN.getrandbits">
+<code class="sig-prename descclassname">scripts.NN.</code><code class="sig-name descname">getrandbits</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span> &#x2192; x.  Generates an int with k random bits.<a class="headerlink" href="#scripts.NN.getrandbits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="scripts.NN.random">
+<code class="sig-prename descclassname">scripts.NN.</code><code class="sig-name descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; x in the interval [0, 1).<a class="headerlink" href="#scripts.NN.random" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="scripts.NN.sigmoid">
+<code class="sig-prename descclassname">scripts.NN.</code><code class="sig-name descname">sigmoid</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.NN.sigmoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sigmoid activation function, which scales a value
+between 0 and 1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> – value to apply sigmoid to</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Transformed value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="scripts.NN.sigmoid_derivative">
+<code class="sig-prename descclassname">scripts.NN.</code><code class="sig-name descname">sigmoid_derivative</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.NN.sigmoid_derivative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the derivative of the sigmoid function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>x</strong> – value to compute the sigmoid derivative for</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Sigmoid derivative of the value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="scripts.NN.training">
+<code class="sig-prename descclassname">scripts.NN.</code><code class="sig-name descname">training</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pos_batch_size</span></em>, <em class="sig-param"><span class="n">neg_batch_size</span></em>, <em class="sig-param"><span class="n">n_epochs</span></em>, <em class="sig-param"><span class="n">nn</span></em>, <em class="sig-param"><span class="n">pos_train</span></em>, <em class="sig-param"><span class="n">neg_train</span></em>, <em class="sig-param"><span class="n">validation</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.NN.training" title="Permalink to this definition">¶</a></dt>
+<dd><p>Trains a neural network using given hyperparameters.
+Uses two queues of pos and neg examples to generate
+class-balanced batches in each epoch. Evaluates validation
+loss after each epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos_batch_size</strong> – How many positive examples to include in each batch</p></li>
+<li><p><strong>neg_batch_size</strong> – How many negative examples to include in each batch</p></li>
+<li><p><strong>n_epochs</strong> – How many epochs to train for</p></li>
+<li><p><strong>nn</strong> – Neural network to train</p></li>
+<li><p><strong>pos_train</strong> – list of positive training examples, where each example
+is a list of length 2, with index 0 being the one-hot
+encoded sequence and index 1 being the class (0 or 1)</p></li>
+<li><p><strong>neg_train</strong> – same as pos_train but for negative training examples</p></li>
+<li><p><strong>validation</strong> – list of validation examples</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>A pandas dataframe containing training/validation loss per epoch</p>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-scripts.io"></span><dl class="py function">
+<dt id="scripts.io.encode_seq">
+<code class="sig-prename descclassname">scripts.io.</code><code class="sig-name descname">encode_seq</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">sequence</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.io.encode_seq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs one-hot encoding of a nucleotide sequence,
+where each nucleotide is represented by a binary vector
+of length 4, ie: [1, 0, 0, 0], where a 1 corresponds to
+which nucleotide it is: [A, C, G, T]</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sequence</strong> – the sequence string to encode</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>A one-hot encoded sequence represented as a list of lists, each with length 4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="scripts.io.read_train_seqs">
+<code class="sig-prename descclassname">scripts.io.</code><code class="sig-name descname">read_train_seqs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pos_file</span></em>, <em class="sig-param"><span class="n">neg_file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#scripts.io.read_train_seqs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads in positive and negative sequences from paths
+into two lists, pos and neg. For negative sequences,
+skips the lines starting with “&gt;”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pos_file</strong> – path to positive examples</p></li>
+<li><p><strong>neg_file</strong> – path to negative examples</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>two lists, where each element is a sequence from the file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Project3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Maggie Tsui.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
