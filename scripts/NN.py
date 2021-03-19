@@ -366,7 +366,7 @@ def training(pos_batch_size, neg_batch_size, n_epochs, nn, pos_train, neg_train,
     return losses
 
 
-def cross_validation(k, pos_batch_size, neg_batch_size, n_epochs, pos_enc, neg_enc):
+def cross_validation(k, nn, pos_batch_size, neg_batch_size, n_epochs, pos_enc, neg_enc, return_model=False):
     """
     Performs k-fold cross validation on a set of training data.
     Splits the data into k different partitions and trains k 
@@ -377,6 +377,8 @@ def cross_validation(k, pos_batch_size, neg_batch_size, n_epochs, pos_enc, neg_e
     ---------
     k
         Number of folds
+    nn
+        neural network object to use
     pos_batch_size
         How many positive examples to include in each batch
     neg_batch_size
@@ -389,7 +391,9 @@ def cross_validation(k, pos_batch_size, neg_batch_size, n_epochs, pos_enc, neg_e
         encoded sequence and index 1 being the class (0 or 1)
     neg_enc
         same as pos_train but for negative training examples
- 
+    return_model
+        Return the trained nn for the last fold 
+        
     Returns
     ---------
     A list of actual classes for each fold, and a list of predicted classes for each fold that can be used to calculate an average AUC across the folds to evaluate model performance
@@ -402,7 +406,6 @@ def cross_validation(k, pos_batch_size, neg_batch_size, n_epochs, pos_enc, neg_e
     all_preds = []
     all_actuals = []
     for i in range(k):
-        print(i)
         if i == k-1: # for the last fold, use all remaining data
             pos_val = pos_enc[i*n_pos_folds:]
             neg_val = neg_enc[i*n_neg_folds:]
@@ -418,8 +421,6 @@ def cross_validation(k, pos_batch_size, neg_batch_size, n_epochs, pos_enc, neg_e
         pos_train = pos_enc[:i*n_pos_folds] + pos_enc[i*n_pos_folds+n_pos_folds:]
         neg_train = neg_enc[:i*n_neg_folds] + neg_enc[i*n_neg_folds+n_neg_folds:]
 
-        
-        nn = NeuralNetwork([[68,25, "sigmoid"], [25,1, "sigmoid"]])
         # train
         losses = training(pos_batch_size = pos_batch_size,neg_batch_size = neg_batch_size,
                           n_epochs = n_epochs, nn = nn, pos_train = pos_train, 
@@ -432,5 +433,8 @@ def cross_validation(k, pos_batch_size, neg_batch_size, n_epochs, pos_enc, neg_e
             actuals.append(val[-1][0])
         all_preds.append(preds)
         all_actuals.append(actuals)
-    return all_preds, all_actuals
+    if return_model == False:
+        return all_preds, all_actuals
+    if return_model == True:
+        return nn
     

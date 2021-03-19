@@ -1,3 +1,8 @@
+import pytest
+from scripts.NN import *
+from scripts.io import *
+
+@pytest.fixture
 def test_make_weights():
     nn = NeuralNetwork(setup=[[8,3,"sigmoid"],[3,8,"sigmoid"]])
     # check that it made the correct number of layers and 
