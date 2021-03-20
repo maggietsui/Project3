@@ -1,4 +1,5 @@
 import pytest
+import copy
 from scripts.NN import *
 from scripts.io import *
 
@@ -25,12 +26,11 @@ def test_feedforward():
 def test_backprop():
     nn = NeuralNetwork([[2,1, "sigmoid"], [1,2, "sigmoid"]])
     nn.feedforward([1,1])
-    old_weights = nn.weights
+    old_weights = copy.deepcopy(nn.weights)
     nn.backprop(true_values = [1,1], data = [[1,1],[1,1]])
     new_weights = nn.weights
     # check that the weights actually got updated
     assert old_weights != new_weights
-    
 
 def test_read_train_seqs():
     pos,neg = read_train_seqs(pos_file = "data/rap1-lieb-positives.txt", neg_file = "data/yeast-upstream-1k-negative.fa")
