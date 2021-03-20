@@ -33,7 +33,7 @@ def test_backprop():
     
 
 def test_read_train_seqs():
-    pos,neg = read_train_seqs(pos_file = "/data/rap1-lieb-positives.txt", neg_file = "/data/yeast-upstream-1k-negative.fa")
+    pos,neg = read_train_seqs(pos_file = "data/rap1-lieb-positives.txt", neg_file = "data/yeast-upstream-1k-negative.fa")
     print(len(pos),len(neg))
     assert len(neg) == 3164
     assert len(pos) == 137
