@@ -26,7 +26,7 @@ def test_backprop():
     nn = NeuralNetwork([[2,1, "sigmoid"], [1,2, "sigmoid"]])
     nn.feedforward([1,1])
     old_weights = nn.weights
-    nn.backprop()
+    nn.backprop(true_values = [1,1], data = [[1,1],[1,1]])
     new_weights = nn.weights
     # check that the weights actually got updated
     assert old_weights != new_weights
