@@ -1,9 +1,5 @@
 import numpy as np
 import pandas as pd
-import queue
-import math
-import matplotlib.pyplot as plt
-from sklearn.metrics import roc_auc_score, roc_curve
 from random import *
 
 class NeuralNetwork:
